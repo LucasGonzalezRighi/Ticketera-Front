@@ -1,5 +1,5 @@
 import React from 'react';
-import { TicketWithEvent } from '../../interfaces/ticket';
+import { TicketWithEvent } from '../../../interfaces/ticket';
 import { TicketCard } from '../molecules/TicketCard';
 import { Loader } from '../../ui/atoms/Loader';
 

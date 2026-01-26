@@ -1,5 +1,5 @@
 import React from 'react';
-import { Event } from '../../interfaces/event';
+import { Event } from '../../../interfaces/event';
 import { EventCard } from '../molecules/EventCard';
 import { Loader } from '../../ui/atoms/Loader';
 
