@@ -4,7 +4,7 @@ import { Loader2 } from 'lucide-react';
 export const Loader: React.FC = () => {
   return (
     <div className="flex justify-center items-center py-12">
-      <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+      <Loader2 className="w-8 h-8 text-primary animate-spin" />
     </div>
   );
 };

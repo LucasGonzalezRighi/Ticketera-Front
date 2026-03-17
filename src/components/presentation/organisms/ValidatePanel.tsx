@@ -15,7 +15,7 @@ export const ValidatePanel: React.FC = () => {
     if (!code) return;
     try {
       await validate(code);
-    } catch (err) {
+    } catch {
       // Error is handled by hook state
     }
   };

@@ -19,4 +19,10 @@ export const authApi = {
     const response = await api.get<ApiResponse<User>>(API_ROUTES.AUTH.ME);
     return response.data;
   },
+  
+  logout: async () => {
+    // Optional: Call backend to invalidate token if implemented
+    // await api.post(API_ROUTES.AUTH.LOGOUT);
+    return Promise.resolve(); 
+  }
 };

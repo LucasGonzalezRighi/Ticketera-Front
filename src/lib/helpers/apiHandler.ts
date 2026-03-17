@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 export function handleApiSuccess<T>(data: T, status: number = 200) {
   return NextResponse.json(
@@ -24,10 +24,21 @@ export function handleApiError(error: unknown) {
       status = error.response.status;
       message = error.response.data?.message || error.message;
       code = error.response.data?.code || `BACKEND_${status}`;
+
+      // Manejo específico de códigos HTTP
+      if (status === 404) {
+        status = 502;
+        message = 'Ruta de backend no encontrada (revisar endpoints)';
+        code = 'BAD_GATEWAY';
+      } else if (status === 401) {
+        status = 401;
+        message = 'Credenciales incorrectas';
+        code = 'UNAUTHORIZED';
+      }
     } else if (error.request) {
-      // Si no hubo respuesta del backend
+      // Errores de conexión (ECONNREFUSED, ENOTFOUND, timeout)
       status = 503;
-      message = 'No se pudo contactar con el servidor backend';
+      message = 'Backend no disponible';
       code = 'SERVICE_UNAVAILABLE';
     }
   } else if (error instanceof Error) {

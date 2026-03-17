@@ -1,16 +1,31 @@
+'use client';
+
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useRegister } from '../../../hooks/useRegister';
 import { Button } from '../../ui/atoms/Button';
 import { TextField } from '../../ui/atoms/TextField';
 import { PasswordField } from '../../ui/atoms/PasswordField';
+import { storage } from '../../../utils/storage';
 
 export const RegisterForm: React.FC = () => {
   const { register, isLoading, error } = useRegister();
+  const router = useRouter();
   const [formData, setFormData] = useState({ email: '', password: '', name: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await register(formData);
+    try {
+      await register(formData);
+      // Check if auto-login happened (token exists)
+      if (storage.getToken()) {
+        router.push('/dashboard');
+      } else {
+        router.push('/login');
+      }
+    } catch (error) {
+      // Error handled by hook state
+    }
   };
 
   return (

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { AuthProvider } from '../context/AuthContext';
+import { Providers } from './providers';
+import { AuroraBackground } from '../components/presentation/backgrounds/AuroraBackground';
 import { LayoutWrapper } from '../components/presentation/organisms/LayoutWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,13 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className="dark" suppressHydrationWarning>
       <body className={inter.className}>
-        <AuthProvider>
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
-        </AuthProvider>
+        <div className="relative min-h-screen overflow-hidden bg-slate-950">
+          <AuroraBackground />
+          <div className="relative z-10">
+            <Providers>
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+            </Providers>
+          </div>
+        </div>
       </body>
     </html>
   );

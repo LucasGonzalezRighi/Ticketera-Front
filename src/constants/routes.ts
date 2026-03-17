@@ -1,9 +1,9 @@
 export const APP_ROUTES = {
   HOME: '/',
-  LOGIN: '/login',
-  REGISTER: '/register',
+  LOGIN: '/new-login',
+  REGISTER: '/new-register',
   DASHBOARD: '/dashboard',
-  MY_TICKETS: '/my-tickets',
+  MY_TICKETS: '/dashboard/tickets',
   VALIDATE: '/validate',
   EVENTS: {
     DETAIL: (id: string) => `/events/${id}`,

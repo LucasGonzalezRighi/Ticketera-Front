@@ -1,14 +1,14 @@
 // file: front-end/src/api/tickets.ts
 import api from './base';
 import { ApiResponse } from '../interfaces/api';
-import { Ticket, TicketWithEvent } from '../interfaces/ticket';
+import { PurchaseResponse, TicketWithEvent } from '../interfaces/ticket';
 import { API_ROUTES } from '../constants/api';
 
 export interface ValidateResponse {
   valid: boolean;
   status: string;
   validatedAt?: string;
-  ticket?: Ticket;
+  ticket?: any; // Avoiding circular dep for now, or use Ticket
   event?: {
     title: string;
     venue: string;
@@ -21,8 +21,9 @@ export interface ValidateResponse {
 }
 
 export const ticketsApi = {
-  purchase: async (eventId: string) => {
-    const response = await api.post<ApiResponse<Ticket>>(API_ROUTES.TICKETS.PURCHASE, { eventId });
+  purchase: async (eventId: string, quantity: number) => {
+    // Return PurchaseResponse
+    const response = await api.post<ApiResponse<PurchaseResponse>>(API_ROUTES.TICKETS.PURCHASE, { eventId, quantity });
     return response.data;
   },
 
